@@ -85,6 +85,12 @@
 # If enable_logging is set to 'yes', the name of the file in which to store
 # the request logs.
 #
+# [*log_format*]
+# If enable_logging is set to 'yes', The log file format. 
+# This specifies the line of text that will be written to the log file when 
+# a connection to the traffic manager is completed. 
+# Many parameters from the connection can be recorded using macros.
+#
 # [*caching*]
 # If set to 'yes' the Stingray Traffic Manager will attempt to cache web
 # server responses. The default is 'no'.
@@ -169,6 +175,7 @@ define stingray::virtual_server(
   $response_rules      = undef,
   $enable_logging      = false,
   $log_filename        = '%zeushome%/zxtm/log/%v.log',
+  $log_format          = '%h %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i"',
   $caching             = 'no',
   $compression         = 'no',
   $compression_level   = undef,

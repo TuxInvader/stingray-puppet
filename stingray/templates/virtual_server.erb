@@ -10,6 +10,7 @@ protocol <%= @proto_code %>
 <% if @enable_logging -%>
 log!enabled     Yes
 log!filename    <%= @log_filename %>
+log!format      <%= @log_format %>
 <% end -%>
 <% if @max_client_buffer then -%>
 max_client_buffer       <%= @max_client_buffer %>
