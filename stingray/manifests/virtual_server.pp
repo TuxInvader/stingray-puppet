@@ -85,6 +85,12 @@
 # If enable_logging is set to 'yes', the name of the file in which to store
 # the request logs.
 #
+# [*log_format*]
+# If enable_logging is set to 'yes', The log file format. 
+# This specifies the line of text that will be written to the log file when 
+# a connection to the traffic manager is completed. 
+# Many parameters from the connection can be recorded using macros.
+#
 # [*caching*]
 # If set to 'yes' the Stingray Traffic Manager will attempt to cache web
 # server responses. The default is 'no'.
@@ -115,10 +121,9 @@
 # capability with Stingray Aptimizer Express is available as a licensed
 # add-on module for Stingray Traffic Manager 9.5 and later.
 #
-# [*max_client_buffer*]
-# The amount of memory, in bytes, that the virtual server should use to store
-# data sent by the client. Larger values will use more memory, but will minimise
-# the number of read() and write() system calls that the traffic manager must perform.
+# [*rc_save_all*]
+# set line recent_conns!save_all
+# Default is undef
 #
 # === Examples
 #
@@ -160,14 +165,15 @@ define stingray::virtual_server(
   $response_rules      = undef,
   $enable_logging      = false,
   $log_filename        = '%zeushome%/zxtm/log/%v.log',
+  $log_format          = '%h %l %u %t "%r" %s %b "%{Referer}i" "%{User-agent}i"',
   $caching             = 'no',
   $compression         = 'no',
   $compression_level   = undef,
   $timeout             = undef,
   $connect_timeout     = undef,
   $aptimizer_express   = 'no',
-  $max_client_buffer   = undef
-
+  $rc_save_all         = undef,
+  $error_file          = undef
 ) {
   include stingray
 
